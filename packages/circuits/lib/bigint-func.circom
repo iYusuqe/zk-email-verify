@@ -166,8 +166,17 @@ function long_scalar_mult(n, k, a, b) {
 // out[0] has length m + 1 -- quotient
 // out[1] has length k -- remainder
 // implements algorithm of https://people.eecs.berkeley.edu/~fateman/282/F%20Wright%20notes/week4.pdf
+// issue #215
+// the initiallization for "out" is not required
+// 
+// check for affect ; since this process updated m, 
+// new k <- the degree of nonzero at b
+// new m + new k = original m + original k
+// m is the degree gap between a and b (or the length of quotient in the reefrence)
+// other functions do not assume the highest register is nonzero.
 function long_div(n, k, m, a, b){
     var out[2][100];
+    /*
     m += k;
     while (b[k-1] == 0) {
         out[1][k] = 0;
@@ -175,6 +184,8 @@ function long_div(n, k, m, a, b){
         assert(k > 0);
     }
     m -= k;
+    */
+
 
     var remainder[100];
     for (var i = 0; i < m + k; i++) {
